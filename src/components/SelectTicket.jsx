@@ -86,6 +86,12 @@ const TicketSelectionBody = styled.div`
 `;
 
 const TechemberText = styled.div`
+  background: radial-gradient(
+      103.64% 57.39% at 14.02% 32.06%,
+      rgba(36, 160, 181, 0.2) 0%,
+      rgba(36, 160, 181, 0) 100%
+    ),
+    rgba(10, 12, 17, 0.1);
   border: 1px solid #07373f;
   max-width: 556px;
   max-height: 200px;
