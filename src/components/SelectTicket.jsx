@@ -1,57 +1,164 @@
-import React from "react";
+// import React from "react";
+import styled from "styled-components";
+
+const typeAccess = [
+  { name: "REG ACCESS", quantity: "20 left!", amount: "Free" },
+  { name: "VIP ACCESS", quantity: "20 left!", amount: "$50" },
+  { name: "VVIP ACCESS", quantity: "20 left!", amount: "$150" },
+];
 
 export default function SelectTicket() {
   return (
-    <div>
-      <header>
+    <TicketSelection>
+      <TicketSelectionHeader>
         <h1>Ticket Selection</h1>
         <p>Step 1/3</p>
-      </header>
-      <div>
-        <div>
-          <h2>Techember Fest "25</h2>
-          <p>
-            Join us for an unforgettable experience at [Event Name]! Secure your
-            spot now.
-          </p>
-          <p>! [Event Location] || March 15, 2025 || 7:00PM</p>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <p>Select Ticket Type:</p>
-        <div>
+      </TicketSelectionHeader>
+      <TicketSelectionBody>
+        <TechemberText>
           <div>
-            <div>
-              <p>REGULAR ACCESS</p>
-              <p>20 left!</p>
-            </div>
-            <p>Free</p>
+            <h2>Techember Fest &quot;25</h2>
+            <p>
+              Join us for an unforgettable experience at <br /> [Event Name]!
+              Secure your spot now.
+            </p>
+            <p>! [Event Location] || March 15, 2025 || 7:00PM</p>
           </div>
-          <div>
-            <div>
-              <p>VIP ACCESS</p>
-              <p>20 left!</p>
-            </div>
-            <p>$50</p>
-          </div>
-          <div>
-            <div>
-              <p>VVIP ACCESS</p>
-              <p>20 left!</p>
-            </div>
-            <p>$150</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <p>Number of Tickets</p>
-        <input type="text" name="" id="" />
-        <div>
-          <button>Cancel</button>
-          <button>Next</button>
-        </div>
-      </div>
-    </div>
+        </TechemberText>
+        <hr />
+        <TicketSelectionMain>
+          <TicketSelectionTypeText>Select Ticket Type:</TicketSelectionTypeText>
+          <TicketSelectionContent>
+            {typeAccess.map((access) => {
+              return (
+                <TicketSelectionChild key={access.name}>
+                  <div>
+                    <p>{access.name}</p>
+                    <p>{access.quantity}</p>
+                  </div>
+                  <TicketAmount>{access.amount}</TicketAmount>
+                </TicketSelectionChild>
+              );
+            })}
+          </TicketSelectionContent>
+        </TicketSelectionMain>
+        <TicketNumber>
+          <p>Number of Tickets</p>
+          <Select>
+            {Array.from({ length: 30 }, (_, i) => (
+              <option key={i + 1} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+          </Select>
+        </TicketNumber>
+        <Buttons>
+          <Button className="button-cancel">Cancel</Button>
+          <Button className="button-next">Next</Button>
+        </Buttons>
+      </TicketSelectionBody>
+    </TicketSelection>
   );
 }
+
+const TicketSelection = styled.div`
+  border: 1px solid #197686;
+  border-radius: 12px;
+  margin-top: 30px;
+  padding: 48px;
+  max-width: 700px;
+  max-height: 902px;
+  background-color: #041e23;
+`;
+
+const TicketSelectionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const TicketSelectionBody = styled.div`
+  text-align: center;
+  border: 1px solid #0e464f;
+  border-radius: 12px;
+  padding: 24px;
+  background-color: #08252b;
+`;
+
+const TechemberText = styled.div`
+  border: 1px solid #07373f;
+  max-width: 556px;
+  max-height: 200px;
+  padding: 24px;
+  margin: 20px;
+  border-radius: 12px;
+`;
+const TicketSelectionMain = styled.div``;
+const TicketSelectionTypeText = styled.p`
+  text-align: left;
+`;
+
+const TicketSelectionContent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 556px;
+  max-height: 186px;
+  border: 1px solid #07373f;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px;
+`;
+
+const TicketSelectionChild = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 25px;
+  max-width: 242px;
+  max-height: 65px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #07373f;
+  justify-content: center;
+`;
+
+const TicketAmount = styled.p`
+  padding: 8px;
+  border: 1px solid #2ba4b9;
+  border-radius: 12px;
+  max-width: 80px;
+  max-height: 30px;
+  background-color: #0e464f;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+`;
+
+const TicketNumber = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+`;
+
+const Select = styled.select`
+  background-color: #08252b;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #07373f;
+  margin-bottom: 10px;
+`;
+
+const Buttons = styled.div`
+  border: 1px solid #0e464f;
+  border-radius: 24px;
+  padding: 0;
+  margin-top: 10px;
+`;
+
+const Button = styled.button`
+  width: 214px;
+  height: 48px;
+  /* padding: 24px 12px; */
+  border-radius: 8px;
+`;

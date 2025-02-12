@@ -1,0 +1,12 @@
+.button-cancel {
+  color: #ffffff;
+  border: 1px solid #0e464f;
+  background-color: #041e23;
+  margin-right: 20px;
+}
+
+.button-next {
+  color: #ffffff;
+  border: 1px solid #0e464f;
+  background-color: #24a0b5;
+}
