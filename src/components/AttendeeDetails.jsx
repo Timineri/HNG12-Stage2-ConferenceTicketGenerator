@@ -1,7 +1,24 @@
 // import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function AttendeeDetails() {
+export default function AttendeeDetails({ step, onNext, onPrev }) {
+  const [inputName, setInputName] = useState(" ");
+  const [inputEmail, setInputEmail] = useState(" ");
+  const [inputRequest, setInputRequest] = useState("");
+
+  const handleName = (event) => {
+    setInputName(event.target.value);
+  };
+
+  const handleEmail = (event) => {
+    setInputEmail(event.target.value);
+  };
+
+  const handleRequest = (event) => {
+    setInputRequest(event.target.value);
+  };
+
   return (
     <AttendeDetails>
       <AttendeeDetailsHeader>
@@ -23,24 +40,47 @@ export default function AttendeeDetails() {
           <Form>
             <div>
               <label>Enter your name</label> <br />
-              <Input type="text" name="name" />
+              <Input
+                type="text"
+                name="name"
+                value={inputName}
+                onChange={handleName}
+              />
             </div>
 
             <div>
               <label>Enter your email*</label> <br />
-              <Input type="text" name="name" />
+              <Input
+                type="email"
+                name="name"
+                value={inputEmail}
+                onChange={handleEmail}
+              />
             </div>
 
             <div>
               <label>Special request?</label> <br />
-              <TextArea name="postContent" placeholder="Textarea" />
+              <TextArea
+                name="postContent"
+                placeholder="Textarea"
+                value={inputRequest}
+                onChange={handleRequest}
+              />
             </div>
           </Form>
         </AttendeeDetailsMain>
 
         <Buttons>
-          <Button className="button-cancel">Back</Button>
-          <Button className="button-next">Get my Free Ticket</Button>
+          {step > 0 && (
+            <Button className="button-cancel" onClick={onPrev}>
+              Back
+            </Button>
+          )}
+          {step < 3 && (
+            <Button className="button-next" onClick={onNext}>
+              Get my Free Ticket
+            </Button>
+          )}
         </Buttons>
       </AttendeeDetailsBody>
     </AttendeDetails>
@@ -52,8 +92,9 @@ const AttendeDetails = styled.div`
   border-radius: 12px;
   margin-top: 30px;
   padding: 48px;
-  max-width: 604px;
+  max-width: 700px;
   max-height: 923px;
+
   background-color: #041e23;
 `;
 
@@ -69,6 +110,7 @@ const AttendeeDetailsBody = styled.div`
   border-radius: 12px;
   padding: 24px;
   background-color: #08252b;
+  max-width: 604px;
 `;
 
 const UploadContainerMain = styled.div`
@@ -89,7 +131,7 @@ const UploadContainer = styled.div`
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid #07373f;
-  max-width: 508px;
+  max-width: 608px;
   max-height: 200px;
   padding: 0 25px;
   margin: 20px;
@@ -97,7 +139,7 @@ const UploadContainer = styled.div`
 const DragDrop = styled.div`
   background-color: #0e464f;
   padding: 12px 24px;
-  max-width: 240px;
+  max-width: 340px;
   height: 200px;
   border-radius: 32px;
   display: flex;

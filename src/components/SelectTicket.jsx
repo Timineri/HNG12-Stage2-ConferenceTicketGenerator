@@ -7,7 +7,7 @@ const typeAccess = [
   { name: "VVIP ACCESS", quantity: "20 left!", amount: "$150" },
 ];
 
-export default function SelectTicket() {
+export default function SelectTicket({ step, onNext, onPrev }) {
   return (
     <TicketSelection>
       <TicketSelectionHeader>
@@ -54,7 +54,12 @@ export default function SelectTicket() {
         </TicketNumber>
         <Buttons>
           <Button className="button-cancel">Cancel</Button>
-          <Button className="button-next">Next</Button>
+
+          {step < 3 && (
+            <Button className="button-next" onClick={onNext}>
+              Next
+            </Button>
+          )}
         </Buttons>
       </TicketSelectionBody>
     </TicketSelection>
