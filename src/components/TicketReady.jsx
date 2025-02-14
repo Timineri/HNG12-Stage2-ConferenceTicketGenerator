@@ -1,7 +1,16 @@
 // import React from "react";
 import styled from "styled-components";
 
-export default function TicketReady({ step, onNext, onPrev }) {
+export default function TicketReady({
+  name,
+  email,
+  request,
+  inputTicketNo,
+  step,
+  onNext,
+  onPrev,
+  imagePreview,
+}) {
   return (
     <TicketReadyMain>
       <TicketReadyHeader>
@@ -20,17 +29,17 @@ export default function TicketReady({ step, onNext, onPrev }) {
           ! 04 Rumens road, Ikoyi, Lagos <br /> ! March 15, 2025 | 7:00PM
         </p>
         <UploadContainer>
-          <DragDrop></DragDrop>
+          <DragDrop>{imagePreview}</DragDrop>
         </UploadContainer>
         <Details>
           <Row>
             <Column>
               <Label>Enter your name</Label>
-              <Value>Avi Chukwu</Value>
+              <Value>{name}</Value>
             </Column>
             <Column>
               <Label>Enter your email *</Label>
-              <Value>User@email.com</Value>
+              <Value>{email}</Value>
             </Column>
           </Row>
           <Row>
@@ -40,15 +49,12 @@ export default function TicketReady({ step, onNext, onPrev }) {
             </Column>
             <Column>
               <Label>Ticket for:</Label>
-              <Value>1</Value>
+              <Value>{inputTicketNo}</Value>
             </Column>
           </Row>
           <SpecialRequest>
             <Label>Special request?</Label>
-            <SpecialRequestText>
-              Nil? Or the user's sad story they write in there gets this whole
-              space, max of three rows.
-            </SpecialRequestText>
+            <SpecialRequestText>{request}</SpecialRequestText>
           </SpecialRequest>
         </Details>
       </TicketReadyBody>
@@ -58,11 +64,7 @@ export default function TicketReady({ step, onNext, onPrev }) {
             Book Another Ticket
           </Button>
         )}
-        {step < 3 && (
-          <Button className="button-next" onClick={onNext}>
-            Download Ticket
-          </Button>
-        )}
+        {step <= 3 && <Button className="button-next">Download Ticket</Button>}
       </Buttons>
     </TicketReadyMain>
   );
@@ -73,8 +75,8 @@ const TicketReadyMain = styled.div`
   border-radius: 12px;
   margin-top: 30px;
   padding: 48px;
-  max-width: 700px;
-  max-height: 1025px;
+  /* max-width: 700px;
+  max-height: 1025px; */
   background-color: #041e23;
 `;
 
@@ -93,8 +95,8 @@ const TicketReadyBody = styled.div`
   border-radius: 12px;
   margin-top: 30px;
   padding: 48px;
-  max-width: 604px;
-  max-height: 923px;
+  /* max-width: 604px;
+  max-height: 923px; */
   text-align: center;
   background: radial-gradient(
       103.64% 57.39% at 14.02% 32.06%,

@@ -1,24 +1,19 @@
 // import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 
-export default function AttendeeDetails({ step, onNext, onPrev }) {
-  const [inputName, setInputName] = useState(" ");
-  const [inputEmail, setInputEmail] = useState(" ");
-  const [inputRequest, setInputRequest] = useState("");
-
-  const handleName = (event) => {
-    setInputName(event.target.value);
-  };
-
-  const handleEmail = (event) => {
-    setInputEmail(event.target.value);
-  };
-
-  const handleRequest = (event) => {
-    setInputRequest(event.target.value);
-  };
-
+export default function AttendeeDetails({
+  name,
+  onChangeName,
+  email,
+  onChangeEmail,
+  request,
+  onChangeRequest,
+  step,
+  onNext,
+  onPrev,
+  handleImageChange,
+  imagePreview,
+}) {
   return (
     <AttendeDetails>
       <AttendeeDetailsHeader>
@@ -30,8 +25,24 @@ export default function AttendeeDetails({ step, onNext, onPrev }) {
           <UploadText>Upload Profile Photo:</UploadText>
           <UploadContainer>
             <DragDrop>
-              <i className="fa-solid fa-cloud-arrow-down"></i>
-              <p>Drag & drop or click to upload</p>
+              {!imagePreview && (
+                <div>
+                  <i className="fa-solid fa-cloud-arrow-down"></i>
+                  <label>
+                    Drag & drop or click to upload
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                </div>
+              )}
+              {imagePreview && (
+                <div>
+                  <Image src={imagePreview} alt="Preview" />
+                </div>
+              )}
             </DragDrop>
           </UploadContainer>
         </UploadContainerMain>
@@ -41,30 +52,33 @@ export default function AttendeeDetails({ step, onNext, onPrev }) {
             <div>
               <label>Enter your name</label> <br />
               <Input
+                className="input"
                 type="text"
                 name="name"
-                value={inputName}
-                onChange={handleName}
+                value={name}
+                onChange={onChangeName}
               />
             </div>
 
             <div>
               <label>Enter your email*</label> <br />
               <Input
+                className="input"
                 type="email"
                 name="name"
-                value={inputEmail}
-                onChange={handleEmail}
+                value={email}
+                onChange={onChangeEmail}
               />
             </div>
 
             <div>
               <label>Special request?</label> <br />
               <TextArea
+                className="input"
                 name="postContent"
                 placeholder="Textarea"
-                value={inputRequest}
-                onChange={handleRequest}
+                value={request}
+                onChange={onChangeRequest}
               />
             </div>
           </Form>
@@ -83,6 +97,9 @@ export default function AttendeeDetails({ step, onNext, onPrev }) {
           )}
         </Buttons>
       </AttendeeDetailsBody>
+      <div className="p-4">
+        {/* <input type="file" onChange={handleImageChange} className="mb-4" /> */}
+      </div>
     </AttendeDetails>
   );
 }
@@ -92,8 +109,8 @@ const AttendeDetails = styled.div`
   border-radius: 12px;
   margin-top: 30px;
   padding: 48px;
-  max-width: 700px;
-  max-height: 923px;
+  /* max-width: 700px;
+  max-height: 923px; */
 
   background-color: #041e23;
 `;
@@ -131,15 +148,15 @@ const UploadContainer = styled.div`
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid #07373f;
-  max-width: 608px;
-  max-height: 200px;
+  /* max-width: 608px;
+  max-height: 200px; */
   padding: 0 25px;
   margin: 20px;
 `;
 const DragDrop = styled.div`
   background-color: #0e464f;
   padding: 12px 24px;
-  max-width: 340px;
+  /* max-width: 200px; */
   height: 200px;
   border-radius: 32px;
   display: flex;
@@ -147,7 +164,11 @@ const DragDrop = styled.div`
   align-items: center;
   flex-direction: column;
 `;
-
+const Image = styled.img`
+  height: 230px;
+  width: 200px;
+  border-radius: 32px;
+`;
 const AttendeeDetailsMain = styled.div``;
 
 const Form = styled.form`
